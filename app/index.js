@@ -23,9 +23,10 @@ async function fetchAndRender() {
             <td>${student.age}</td>
             <td>${student.course}</td>
             <td>
-            <button onclick="editRecord(${student.id})">Edit</button>
+           
+            <button onclick="editRecord(${student.id})"><i class="fa fa-edit" style="font-size:24px"></i></button>
 
-            <button onclick="deleteRecord(${student.id})">delete</button>
+            <button onclick="deleteRecord(${student.id})"><i class="fa fa-trash-o" style="font-size:24px"></i></button>
             </td>
         `;
             document.getElementById("studentList").appendChild(row);
@@ -76,6 +77,7 @@ async function deleteRecord(id) {
 
 async function editRecord(id) {
     const input = document.getElementById("nameEle").value;
+
     try {
         const res = await axios.patch(`${url}/${id}`, { name: input })
         fetchAndRender()
