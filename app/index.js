@@ -76,14 +76,32 @@ async function deleteRecord(id) {
 }
 
 async function editRecord(id) {
-    const input = document.getElementById("nameEle").value;
+    const nameInput = document.getElementById("nameEle").value;
+    const rollnoInput = document.getElementById("rollnoEle").value;
+    const ageInput = document.getElementById("ageEle").value;
+    const courseInput = document.getElementById("courseEle").value;
+
+    const dataToUpdate = {};
+
+    if (nameInput.trim() !== "") {
+        dataToUpdate.name = nameInput;
+    }
+    if (rollnoInput.trim() !== "") {
+        dataToUpdate.rollno = rollnoInput;
+    }
+    if (ageInput.trim() !== "") {
+        dataToUpdate.age = ageInput;
+    }
+    if (courseInput.trim() !== "") {
+        dataToUpdate.course = courseInput;
+    }
 
     try {
-        const res = await axios.patch(`${url}/${id}`, { name: input })
-        fetchAndRender()
-        console.log(res)
+        const res = await axios.patch(`${url}/${id}`, dataToUpdate);
+        fetchAndRender();
+        console.log(res);
     }
     catch (err) {
-        console.log(err)
+        console.log(err);
     }
 }
